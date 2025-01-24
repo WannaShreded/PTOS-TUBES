@@ -1,0 +1,88 @@
+body {
+    background-image: url('/perpustakaan/images/lib4.jpg');
+    background-size: cover; /* Pastikan gambar latar belakang menutupi seluruh area */
+    min-height: 100vh; /* Pastikan body mengisi minimal 100% tinggi viewport */
+}
+
+.navbar {
+    background-color: #ffffff; /* Warna navbar */
+}
+
+.navbar-brand img {
+    height: 60px;
+}
+
+.color{
+    color: #ffffff;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+}
+.content {
+    margin-left: 260px; /* Adjust based on sidebar width */
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.slogan {
+    font-family: sans-serif;
+    color: #638fda;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-color: rgba(255, 0, 0, 0); /* Warna latar belakang jumbotron dengan transparansi */
+    border-radius: 0;
+    margin-bottom: 0;
+    min-height: 40vh; /* Pastikan jumbotron mengisi minimal 100% tinggi viewport */
+    display: flex; /* Menggunakan flexbox untuk menyusun konten */
+    flex-direction: column; /* Mengatur arah kolom */
+    justify-content: center; /* Menyusun konten di tengah */
+    align-items: center; /* Menyusun konten di tengah secara horizontal */
+}
+
+.card {
+    margin-bottom: 20px;
+    transition: transform 0.2s; /* Efek transisi */
+    min-height: 400px;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+.card img {
+    max-height: 150px; /* Atur tinggi maksimum untuk gambar */
+    object-fit: cover; /* Pastikan gambar tidak merusak proporsi */
+}
+
+.buku {
+    max-height: 100px; /* Ukuran gambar buku */
+    height: auto;
+    width: auto;
+}
+
+.btn-login {
+    background-color: #000000; /* Warna tombol login */
+    color: white; /* Warna teks putih */
+    font-size: 1.1rem; /* Ukuran font lebih besar */
+    padding: 8px 10px; /* Padding untuk tombol */
+    transition: background-color 0.3s, transform 0.3s; /* Efek transisi */
+}
+
+.btn-login:hover {
+    background-color: #848484; /* Warna lebih gelap saat hover */
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}

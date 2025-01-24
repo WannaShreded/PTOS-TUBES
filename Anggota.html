@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Anggota</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/add_member.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/frlg.png" class="logo" alt="Logo Perpustakaan">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Beranda</a>
+                    <li class="nav-item">
+                        <a class="btn btn-login ml-3" href="System/login.php">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 color">
+        <h2>Manajemen Anggota</h2>
+        <form id="member-form" action="php/add_member.php" method="POST">
+            <div class="form-group">
+                <label for="member-name">Nama Anggota</label>
+                <input type="text" class="form-control" name="member-name" required>
+            </div>
+            <div class="form-group">
+                <label for="member-name">Username</label>
+                <input type="text" class="form-control" name="member-usn" required>
+            </div>
+            <div class="form-group">
+                <label for="member-address">Alamat</label>
+                <input type="text" class="form-control" name="member-address" required>
+            </div>
+            <div class="form-group">
+                <label for="member-birthdate">Tanggal Lahir</label>
+                <input type="date" class="form-control" name="member-birthdate" required>
+            </div>
+            <div class="form-group">
+                <label for="member-phone">No Telepon</label>
+                <input type="text" class="form-control" name="member-phone" required>
+            </div>
+            <div class="form-group">
+                <label for="member-email">Email</label>
+                <input type="email" class="form-control" name="member-email" required>
+            </div>
+            <div class="form-group">
+                <label for="member-email">Password</label>
+                <input type="password" class="form-control" name="member-password" required>
+            </div>
+            <div class="form-group">
+                <label for="member-job">Pekerjaan</label>
+                <input type="text" class="form-control" name="member-job" required>
+            </div>
+            <div class="form-group">
+                <label for="member-gender">Jenis Kelamin</label>
+                <select class="form-control" name="member-gender" required>
+                    <option value="">Pilih...</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah Anggota</button>
+        </form>
+
+        
+        <h3 class="mt-4">Daftar Anggota</h3>
+        <ul id="member-list" class="list-group"></ul> 
+        <a href="/perpustakaan/index.html" class="btn btn-secondary mt-4">Kembali ke Menu Utama</a>
+    </div>
+
+    <footer class="text-center py-4 mt-4">
+        <p class="color">&copy; 2025 Fourmation. Semua hak dilindungi.</p>
+    </footer>
+
+</body>
+</html>
