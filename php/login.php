@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/perpustakaan/css/style.css">
 </head>
 
-<body>
+<body style="background-color: white;">
 
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
         <div class="container-fluid d-flex align-items-center">
@@ -30,22 +30,26 @@
         </div>
     </nav>
 
-    <div class="container mt-5 color">
-        <h2 class="text-center">Login</h2>
-        <form id="login-form" action="login.php" method="POST">
-            <div class="form-group">
-                <label class="color" for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Login</h2>
+                <form id="login-form" action="login.php" method="POST">
+                    <div class="form-group">
+                        <label class="color" for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <p class="text-center mt-3">
+                    Belum punya akun? <a href="/Perpustakaan/Anggota.html">Daftar di sini</a>
+                </p>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
-        <p class="text-center">
-            Belum punya akun? <a href="/Perpustakaan/Anggota.html">Daftar di sini</a>
-        </p>
+        </div>
     </div>
 
     <?php

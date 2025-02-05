@@ -22,7 +22,7 @@ if ($conn->connect_error) {
 }
 
 // Fetch books from the database
-$sql = "SELECT book_id, title, author, genre, stock, status FROM books"; // Adjust the table name and column names as necessary
+$sql = "SELECT book_id, title, author, genre, stock FROM books"; // Adjust the table name and column names as necessary
 $result = $conn->query($sql);
 ?>
 
@@ -44,16 +44,22 @@ $result = $conn->query($sql);
             /* Tambahkan scrollbar vertikal */
         }
 
-        table {
-    background-image: url("/perpustakaan/images/bg1.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: top;
-}
+        
 
+        /* Mengurangi padding di dalam sel tabel */
+        .table td,
+        .table th {
+            padding: 0.3rem; /* Atur padding sesuai kebutuhan */
+        }
 
+        /* Mengatur lebar form pencarian */
+        #search {
+            width: 300px; /* Atur lebar sesuai kebutuhan */
+        }
 
+        body{
+            background-color: white;
+        }
     </style>
 </head>
 
@@ -76,22 +82,17 @@ $result = $conn->query($sql);
                     <li class="nav-item">
                         <a class="nav-link btn-nav" href="Peminjaman.php">Peminjaman</a>
                     </li>
-                    <li class="nav-item active">
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-danger ml-3" href="/perpustakaan/php/logout.php">Logout</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-3 color">
+    <div class="container mt-3">
         <h2>Manajemen Buku</h2>
         <input type="text" id="search" placeholder="Cari buku..." class="form-control mb-3">
 
         <div id="book-list-container">
-            <table class="table table-bordered color">
+            <table class="table table-bordered table-sm color">
                 <thead>
                     <tr>
                         <th>ID BUKU</th>
@@ -104,22 +105,18 @@ $result = $conn->query($sql);
                 </thead>
                 <tbody id="book-list">
                     <?php
-                    // Batasi hasil menjadi 10 baris
-                    $limit = 100000;
-                    $offset = 0; // Anda bisa menambahkan logika untuk pagination di sini
-                    $query = "SELECT * FROM books LIMIT $limit OFFSET $offset"; // Sesuaikan dengan query Anda
-                    $result = $conn->query($query); // Pastikan $conn adalah koneksi database Anda
-
                     if ($result->num_rows > 0) {
                         // Output data dari setiap baris
                         while ($row = $result->fetch_assoc()) {
+                            // Tentukan status berdasarkan stok
+                            $status = $row['stock'] > 0 ? "Tersedia" : "Tidak Tersedia";
                             echo "<tr class='book-row' data-id='" . htmlspecialchars($row['book_id']) . "'>
                                 <td>" . htmlspecialchars($row['book_id']) . "</td>
                                 <td>" . htmlspecialchars($row['title']) . "</td>
                                 <td>" . htmlspecialchars($row['author']) . "</td>
                                 <td>" . htmlspecialchars($row['genre']) . "</td>
                                 <td>" . htmlspecialchars($row['stock']) . "</td>
-                                <td>" . htmlspecialchars($row['status']) . "</td>
+                                <td>" . htmlspecialchars($status) . "</td>
                               </tr>";
                         }
                     } else {
@@ -146,8 +143,10 @@ $result = $conn->query($sql);
                     },
                     success: function(data) {
                         $('#book-list').empty(); // Clear the current book list
-                        if (data.length > 0) {
+                        if (data .length > 0) {
                             $.each(data, function(index, book) {
+                                // Tentukan status berdasarkan stok
+                                var status = book.stock > 0 ? "Tersedia" : "Tidak Tersedia";
                                 $('#book-list').append(
                                     "<tr class='book-row' data-id='" + book.book_id + "'>" +
                                     "<td>" + book.book_id + "</td>" +
@@ -155,7 +154,7 @@ $result = $conn->query($sql);
                                     "<td>" + book.author + "</td>" +
                                     "<td>" + book.genre + "</td>" +
                                     "<td>" + book.stock + "</td>" +
-                                    "<td>" + book.status + "</td>" +
+                                    "<td>" + status + "</td>" +
                                     "</tr>"
                                 );
                             });

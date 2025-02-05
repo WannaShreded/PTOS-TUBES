@@ -66,7 +66,7 @@ $stmt->fetch();
 $stmt->close();
 
 // Prepare and execute SQL statement to insert loan data
-$sql = "INSERT INTO Loans (Book_id, Member_id, Borrow_Date, Return_Date) VALUES (?, ?, ?, ?)";
+$sql = "INSERT INTO Loans (Book_id, Member_id, checkout_Date, Return_Date) VALUES (?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iiss", $bookId, $memberId, $loanDate, $returnDate);
 

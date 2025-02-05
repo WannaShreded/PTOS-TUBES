@@ -18,20 +18,55 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/perpustakaan/css/style.css">
+    <style>
+        body{
+            background-color: white;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -250px; /* Hide sidebar off-screen */
+            width: 250px;
+            height: 100%;
+            background-color: #f8f9fa;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: left 0.3s;
+            z-index: 1000;
+        }
+        .sidebar.active {
+            left: 0; /* Show sidebar */
+        }
+        .sidebar-header {
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            text-align: center;
+        }
+        .sidebar-content {
+            padding: 15px;
+        }
+        .profile-icon {
+            font-size: 100px; /* Adjust size of the icon */
+            color: #007bff; /* Change color of the icon */
+        }
+    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container-fluid d-flex align-items-center">
             <a class="navbar-brand" href="member_area.php">
-            <img src="/perpustakaan/images/frlg.png" class="logo" alt="Logo Perpustakaan">
+                <img src="/perpustakaan/images/frlg.png" class="logo" alt="Logo Perpustakaan">
             </a>
             <span class="slogan"><b>Lightning The Way To Infinite Learning</b></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
@@ -43,24 +78,44 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                     <li class="nav-item">
                         <a class="nav-link btn-nav" href="Peminjaman.php">Peminjaman</a>
                     </li>
-                    <li class="nav-item active">
-                    </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger ml-3" href="logout.php">Logout</a>
+                        <button class="btn btn-info ml-3" id="toggleSidebar">Profil</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="jumbotron text-center py-5 color">
-        <h2>Selamat Datang, <b><?php echo htmlspecialchars($_SESSION['username']); ?></b>!<br>Selamat Membaca!!</h2>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h5>Profil Pengguna</h5>
+            <button class="close-btn" id="closeSidebar" style="background: none; border: none; color: white; cursor: pointer;">&times;</button>
+        </div>
+        <div class="sidebar-content text-center">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <h5><?php echo htmlspecialchars($_SESSION['username']); ?></h5>
+            <p>Selamat datang di perpustakaan!</p>
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+        </div>
     </div>
 
-    <div class="container">
-        <h2 class="text-center mb-4 color"> <br>Coming Soon</h2>
+    <div class="container mt-4">
+        <div class="alert alert-info text-center" role="alert">
+            Jangan lupa untuk mengembalikan buku tepat waktu!
+        </div>
+
+        <div class="d-flex justify-content-center mb-4">
+            <a href="Buku.php" class="btn btn-primary mx-2">Daftar Buku</a>
+            <a href="Peminjaman.php" class="btn btn-secondary mx-2">Peminjaman</a>
+        </div>
+
+        <div class="jumbotron text-center py-5 color">
+            <h2>Selamat Datang, <b><?php echo htmlspecialchars($_SESSION['username']); ?></b>!<br>Selamat Membaca!!</h2>
+        </div>
+
+        <h2 class="text-center mb-4 color">Coming Soon</h2>
         <h3 class="text-center mb-4 color">Buku Yang Akan Hadir Di Perpustakaan Ini</h3>
-    
+
         <div id="comingSoonCarousel" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="false">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -77,8 +132,8 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="col-md-2 mb-4">
                             <div class="card shadow-sm text-center h-100">
                                 <div class="card-body">
-                                    <img src="/perpustakaan/images/sarup.jpg" class="buku" alt="Buku Selalu Ada Ruang Untuk Pulang">
-                                    <h5 class="card-title mt-3">Selalu Ada Ruang Untuk Pulang</h5>
+                                    <img src="/perpustakaan/images/sarup.jpg" class="buku" alt ="Buku Selalu Ada Ruang Untuk Pulang">
+                                    <h <h5 class="card-title mt-3">Selalu Ada Ruang Untuk Pulang</h5>
                                     <p class="card-text">Karima Ifha</p>
                                 </div>
                             </div>
@@ -104,7 +159,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                         <div class="col-md-2 mb-4">
                             <div class="card shadow-sm text-center h-100">
                                 <div class="card-body">
-                                    <img src="/perpustakaan/images/kphi.jpg" class="buku " alt="Buku Kita Pergi Hari Ini">
+                                    <img src="/perpustakaan/images/kphi.jpg" class="buku" alt="Buku Kita Pergi Hari Ini">
                                     <h5 class="card-title mt-3">Kita Pergi Hari Ini</h5>
                                     <p class="card-text">Ziggy Zezsyazeoviennazabrizkie</p>
                                 </div>
@@ -159,7 +214,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2 mb-4">
+                        <div class=" col-md-2 mb-4">
                             <div class="card shadow-sm text-center h-100">
                                 <div class="card-body">
                                     <img src="/perpustakaan/images/dktnhkm.jpg" class="buku" alt="Buku Baru 2">
@@ -186,17 +241,29 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
             </a>
             <a class="carousel-control-next" href="#comingSoonCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Selanjutnya</span> </a>
+                <span class="sr-only">Selanjutnya</span>
+            </a>
         </div>
     </div>
 
     <footer class="text-center py-4 mt-4">
         <p class="color">&copy; 2025 Fourmation. Semua hak dilindungi.</p>
+        <a href="/tentang.html">Tentang Kami</a> | 
+        <a href="/kontak.html">Kontak</a> | 
+        <a href="/kebijakan.html">Kebijakan Privasi</a>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        document.getElementById('closeSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.remove('active');
+        });
+    </script>
 </body>
 
 </html>
